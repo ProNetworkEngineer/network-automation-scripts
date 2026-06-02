@@ -10,9 +10,7 @@ Automation scripts for network engineering using Python, Ansible, and API integr
   - `device_backup.py` - Backup device configs
 
 - **ansible/** - Ansible automation
-  - `inventory/` - Device inventory files
   - `playbooks/` - Automation playbooks
-  - `roles/` - Reusable roles
 
 - **api-integrations/** - API scripts
   - `netbox/` - NetBox IPAM/DCIM automation
