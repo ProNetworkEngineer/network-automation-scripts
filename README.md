@@ -13,15 +13,4 @@ Automation scripts for network engineering using Python, Ansible, and API integr
   - `playbooks/` - Automation playbooks
 
 - **api-integrations/** - API scripts
-  - `netbox/` - NetBox IPAM/DCIM automation
   - `prtg/` - PRTG monitoring data
-
-- **configs/** - Stored device configurations
-
-## 🚀 Quick Start
-
-```bash
-git clone https://github.com/ProNetworkEngineer/network-automation-scripts.git
-cd network-automation-scripts
-pip install netmiko requests
-python python/device_backup.py
