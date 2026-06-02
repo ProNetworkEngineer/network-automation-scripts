@@ -1,0 +1,42 @@
+---
+- name: Backup Network Device Configurations
+  hosts: network_devices
+  gather_facts: no
+  connection: network_cli
+
+  vars:
+    backup_dir: "../configs/"
+    timestamp: "{{ ansible_date_time.date }}_{{ ansible_date_time.time | replace(':', '') }}"
+
+  tasks:
+    - name: Show running configuration
+      ios_command:
+        commands:
+          - show running-config
+      register: running_config
+      when: ansible_network_os == 'ios'
+
+    - name: Show configuration on Juniper
+      junos_command:
+        commands:
+          - show configuration
+      register: junos_config
+      when: ansible_network_os == 'junos'
+
+    - name: Save Cisco config to file
+      copy:
+        content: "{{ running_config.stdout[0] }}"
+        dest: "{{ backup_dir }}{{ inventory_hostname }}_{{ timestamp }}.cfg"
+      when: ansible_network_os == 'ios'
+      delegate_to: localhost
+
+    - name: Save Juniper config to file
+      copy:
+        content: "{{ junos_config.stdout[0] }}"
+        dest: "{{ backup_dir }}{{ inventory_hostname }}_{{ timestamp }}.conf"
+      when: ansible_network_os == 'junos'
+      delegate_to: localhost
+
+    - name: Display backup completion
+      debug:
+        msg: "✅ Backup completed for {{ inventory_hostname }}"
