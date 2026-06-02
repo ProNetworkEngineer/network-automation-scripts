@@ -8,8 +8,6 @@ Automation scripts for network engineering using Python, Ansible, and API integr
 
 - **python/** - Python automation scripts
   - `device_backup.py` - Backup device configs
-  - `ping_sweep.py` - Network ping scanner
-  - `snmp_poller.py` - SNMP data collection
 
 - **ansible/** - Ansible automation
   - `inventory/` - Device inventory files
